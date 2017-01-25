@@ -329,9 +329,12 @@ namespace Wintellect.Paraffin
                 // by default.
                 XElement addToElement = outputDir;
 
-                // If there's no files in this directory, there's nothing else 
-                // to do.
-                if (0 != filesQuery.Count())
+                // If there's no files in this directory, there's still
+                // something to do if e.g. "-PatchUpdate" is used. Don't
+                // early escape here or deleting files inside patches
+                // won't work if the resulting directory will be empty
+                // then. Don't delete the commented line below.
+                //if (0 != filesQuery.Count())
                 {
                     // In case the user wants the .PARAFFIN file to contain
                     // the transitive patch information.
